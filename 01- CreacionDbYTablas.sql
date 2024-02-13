@@ -10,16 +10,26 @@ CREATE TABLE Test (
     NCharField NCHAR(10),
     GuidField UNIQUEIDENTIFIER,
     IntField INT,
+	BigIntField BIGINT,
     DoubleField FLOAT,
     MoneyField MONEY,
-  
+	DatetimeField DATETIME,
+	TimeField TIME,
+	DateField DATE, 
+	BooleanField BIT DEFAULT 1 -- valor por defecto a true
 );
 
 -- Añadimos Filas
 
-INSERT INTO Test (Code, CharField, NCharField, GuidField, IntField, DoubleField, MoneyField)
+INSERT INTO Test (Code, CharField, NCharField, GuidField, IntField, BigIntField, DoubleField, MoneyField, DatetimeField, TimeField, DateField, BooleanField)
 VALUES
-    ('TESTCODE', 'TESTTEXT', N'Unicode', NEWID(), 123, 45.67, 100.50)
+    ('TESTCODE', 'TESTTEXT', N'Unicode', NEWID(), 123, 12345678, 45.67, 100.50, GETDATE(), GETDATE(), GETDATE(), 1),
+	('TESTCODE2', 'TESTTEXT2', N'Unicode2', NEWID(), 456, 98765432, 67.89, 200.75, GETDATE(), GETDATE(), GETDATE(), 0);
+
+-- INSERTAMOS SIN BOOLEAN FIELD, para comprobar default value
+INSERT INTO Test (Code, CharField, NCharField, GuidField, IntField, BigIntField, DoubleField, MoneyField, DatetimeField, TimeField, DateField)
+VALUES
+    ('TESTCODE3', 'TESTTEXT3', N'Unicode3', NEWID(), 789, 11223344, 89.12, 300.99, GETDATE(), GETDATE(), GETDATE());
 
 -- Creamos la segunda tabla
 CREATE DATABASE smcdb2 COLLATE Latin1_General_CS_AS;
