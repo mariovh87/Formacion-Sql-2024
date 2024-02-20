@@ -39,7 +39,11 @@ USE smcdb1;
 GO
 SELECT * INTO smcdb2.dbo.Test FROM Test;
 
--- Consulta con diferentes 
+-- Consulta con diferentes collation
 SELECT * 
+FROM smcdb1.dbo.Test AS t1
+INNER JOIN smcdb2.dbo.Test AS t2 ON t1.Code = t2.Code;
+
+SELECT t1.*,t2.* 
 FROM smcdb1.dbo.Test AS t1
 INNER JOIN smcdb2.dbo.Test AS t2 ON t1.Code = t2.Code;
