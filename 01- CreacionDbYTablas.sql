@@ -24,7 +24,8 @@ CREATE TABLE Test (
 INSERT INTO Test (Code, CharField, NCharField, GuidField, IntField, BigIntField, DoubleField, MoneyField, DatetimeField, TimeField, DateField, BooleanField)
 VALUES
     ('TESTCODE', 'TESTTEXT', N'Unicode', NEWID(), 123, 12345678, 45.67, 100.50, GETDATE(), GETDATE(), GETDATE(), 1),
-	('TESTCODE2', 'TESTTEXT2', N'Unicode2', NEWID(), 456, 98765432, 67.89, 200.75, GETDATE(), GETDATE(), GETDATE(), 0);
+	('TESTCODE2', 'TESTTEXT2', N'Unicode2', NEWID(), 456, 98765432, 67.89, 200.75, GETDATE(), GETDATE(), GETDATE(), 0),
+	('TESTCODE1234???', 'TESTTEXT', N'Unicode2', NEWID(), 4134, 9876544, 67.89, 200.75, GETDATE(), GETDATE(), GETDATE(), 0);
 
 -- INSERTAMOS SIN BOOLEAN FIELD, para comprobar default value
 INSERT INTO Test (Code, CharField, NCharField, GuidField, IntField, BigIntField, DoubleField, MoneyField, DatetimeField, TimeField, DateField)

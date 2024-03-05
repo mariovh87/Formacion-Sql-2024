@@ -40,11 +40,13 @@ CREATE TABLE Sales.Products (
 CREATE TABLE Sales.Customers (
     CustomerId UNIQUEIDENTIFIER PRIMARY KEY,
     CustomerName NVARCHAR(100) NOT NULL,
-    Address NVARCHAR(255),
-    City NVARCHAR(100),
-    Country NVARCHAR(100)
+    AddressId UNIQUEIDENTIFIER,
+    CountryId UNIQUEIDENTIFIER,
+    CONSTRAINT FK_Customers_Address FOREIGN KEY (AddressId)
+        REFERENCES Address(AddressId),
+    CONSTRAINT FK_Customers_Countries FOREIGN KEY (CountryId)
+        REFERENCES Countries(CountryId)
 );
-
 
 -- Crear tabla Countries
 CREATE TABLE Countries (
@@ -77,9 +79,10 @@ CREATE TABLE Sales.Invoices (
     TaxBase DECIMAL(18, 2),
     TotalVat DECIMAL(18, 2),
     Total DECIMAL(18, 2),
-    FOREIGN KEY (CustomerId) REFERENCES Sales.Customers(CustomerId),
-    FOREIGN KEY (AddressId) REFERENCES Address(AddressId)
+    CONSTRAINT FK_Invoices_Customers FOREIGN KEY (CustomerId) REFERENCES Sales.Customers(CustomerId),
+    CONSTRAINT FK_Invoices_Address FOREIGN KEY (AddressId) REFERENCES Address(AddressId)
 );
+
 
 -- Crear tabla Sales.InvoicesDetail
 CREATE TABLE Sales.InvoicesDetail (
@@ -92,7 +95,9 @@ CREATE TABLE Sales.InvoicesDetail (
     Discount DECIMAL(5, 2),
     VatTypeId UNIQUEIDENTIFIER,
     TotalLine DECIMAL(18, 2),
-    FOREIGN KEY (InvoiceId) REFERENCES Sales.Invoices(InvoiceId),
-    FOREIGN KEY (ProductId) REFERENCES Sales.Products(ProductId),
-    FOREIGN KEY (VatTypeId) REFERENCES Sales.VatTypes(VatTypeId)
+    CONSTRAINT FK_InvoicesDetail_Invoices FOREIGN KEY (InvoiceId) REFERENCES Sales.Invoices(InvoiceId),
+    CONSTRAINT FK_InvoicesDetail_Products FOREIGN KEY (ProductId) REFERENCES Sales.Products(ProductId),
+    CONSTRAINT FK_InvoicesDetail_VatTypes FOREIGN KEY (VatTypeId) REFERENCES Sales.VatTypes(VatTypeId)
 );
+
+
